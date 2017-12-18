@@ -37,7 +37,7 @@ node_add = node_constant + node_variable
 # 노드 하나하나가 실행되는 과정을 선으로 연결한 과정 전체
 # 위의 node_constant, node_variable, node_add 전 과정
 
-# 세션1
+# 세션
 sess = tf.Session()
 
 # 세션에서 그래프 실행
