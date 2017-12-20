@@ -38,19 +38,12 @@ print(mnist.train.labels)
 x = tf.placeholder(tf.float32, [None, 784])
 y_ = tf.placeholder(tf.float32, [None, 10])
 
-# 계산 결과 y값
-y = tf.nn.softmax(tf.matmul(x, W) + b)
-# 소프트맥스란, 여러 개의 보기의 정답일 확률의 합이 1
-# 예를 들어 5지선다 문제의 정답 확률을 아래와 같이 표현
-# 1번이 정답일 확률 - 0
-# 2번이 정답일 확률 - 0.1
-# 3번이 정답일 확률 - 0.2
-# 4번이 정답일 확률 - 0.7
-# 5번이 정답일 확률 - 0
-
 # 학습으로 생성될 W, b 변수 (0으로 세팅)
 W = tf.Variable(tf.zeros([784, 10]))
 b = tf.Variable(tf.zeros([10]))
+
+# 계산 결과 y값 (logits)
+y = tf.matmul(x, W) + b
 
 
 # 실행 단계(execution phase)
@@ -58,10 +51,17 @@ b = tf.Variable(tf.zeros([10]))
 # cross_entropy (교차 엔트로피) : 소프트맥스 처리 된 계산값 y와 실제 정답인 y_에 대한 loss 계산시 사용
 # reduce_mean : 벡터 안 모든 수의 평균값
 # reduce_sum : 벡터 안 모든 수의 합
+# softmax: 여러 개의 보기의 정답일 확률의 합이 1
+# 예를 들어 5지선다 문제의 정답 확률을 아래와 같이 표현
+# 1번이 정답일 확률 - 0
+# 2번이 정답일 확률 - 0.1
+# 3번이 정답일 확률 - 0.2
+# 4번이 정답일 확률 - 0.7
+# 5번이 정답일 확률 - 0
 
-# cross_entropy = -tf.reduce_sum(y_ * tf.log(y), reduction_indices=[1])
+# cross_entropy = -tf.reduce_sum(y_ * tf.log(tf.nn.softmax(y)), reduction_indices=[1])
 # cost = tf.reduce_mean(cross_entropy)
-loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=tf.matmul(x, W) + b, labels=y_))
+loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=y, labels=y_))
 
 train_step = tf.train.GradientDescentOptimizer(0.5).minimize(loss)
 
