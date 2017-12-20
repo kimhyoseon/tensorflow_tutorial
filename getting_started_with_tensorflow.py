@@ -65,6 +65,6 @@ for i in range(1000):
 
 # 변수 W와 b print
 print(sess.run([W, b, loss], {x: [1, 2, 3, 4], y: [0, -1, -2, -3]}))
-# [array([-0.9999969], dtype=float32), array([ 0.99999082], dtype=float32)]
+# [array([-0.9999969], dtype=float32), array([ 0.99999082], dtype=float32), 5.6999738e-11]
 # W = -0.9999969, b = 0.99999082, loss = 5.6999738e-11
 # W = -1, b = 1, loss = 0 에 매우 가까우므로 정답을 학습을 통해 알아내는데 성공
