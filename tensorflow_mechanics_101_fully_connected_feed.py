@@ -7,6 +7,9 @@ import tensorflow_mechanics_101 as mnist
 from tensorflow.examples.tutorials.mnist import input_data
 from six.moves import xrange
 
+# MNIST 모델(tensorflow_mechanics_101.py)을 실행
+# 텐서보드 http://koapp.com/files/mobile/201712/app-release_l3UUlbf.apk
+
 FLAGS = None
 
 # 로그를 모두 지움
@@ -112,7 +115,7 @@ def run_training():
     # 평가 함수
     eval_correct = mnist.evaluation(logits, labels_placeholder)
 
-    # ?? Build the summary Tensor based on the TF collection of Summaries.
+    # Build the summary Tensor based on the TF collection of Summaries.
     summary = tf.summary.merge_all()
 
     # 변수 초기화
